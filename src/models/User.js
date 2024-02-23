@@ -3,11 +3,11 @@ const Schema = mongoose.Schema;
 
 const User = new Schema(
   {
-    name: { type: String, required: true },
-    age: { type: Number, required: true },
-    job: { type: String, required: true },
+    name: { type: String },
+    pass: {type: String},
+
   },
-//   { timestamps: true }
+  { timestamps: true }
 );
 
 module.exports = mongoose.model("User", User);

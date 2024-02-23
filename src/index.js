@@ -1,9 +1,10 @@
+const path = require("path");
 const express = require("express");
 const app = express();
-const port = 3002;
+const PORT = process.env.PORT || 3002;
 
 const route = require("./routes");
-const db = require('./config/db');
+const db = require("./config/db");
 
 const handlebars = require("express-handlebars");
 
@@ -14,6 +15,7 @@ app.use(morgan("combined"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.engine(
   "hbs",
@@ -24,10 +26,11 @@ app.engine(
 app.set("view engine", "hbs");
 app.set("views", "src/views");
 
+
 db.connect();
 
 route(app);
 
-app.listen(port, () => {
-  console.log(`Example app listening on port http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Example app listening on port http://localhost:${PORT}`);
 });
